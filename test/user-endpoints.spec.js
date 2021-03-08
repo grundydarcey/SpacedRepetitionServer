@@ -172,17 +172,19 @@ describe('User Endpoints', function () {
           name: 'test name',
         }
         const expectedList = {
-          name: 'French',
+          name: 'Italian',
           total_score: 0,
           words: [
-            { original: 'entraine toi', translation: 'practice' },
-            { original: 'bonjour', translation: 'hello' },
-            { original: 'maison', translation: 'house' },
-            { original: 'développeur', translation: 'developer' },
-            { original: 'traduire', translation: 'translate' },
-            { original: 'incroyable', translation: 'amazing' },
-            { original: 'chien', translation: 'dog' },
-            { original: 'chat', translation: 'cat' },
+            { original: 'colazione', translation: 'breakfast' },
+            { original: 'pranzo', translation: 'lunch' },
+            { original: 'cena', translation: 'dinner' },
+            { original: 'il conto', translation: 'the check' },
+            { original: 'argenteria', translation: 'silverware' },
+            { original: 'pane', translation: 'bread' },
+            { original: 'vino', translation: 'wine' },
+            { original: 'bevanda', translation: 'a drink' },
+            { original: 'acqua', translation: 'water' },
+            { original: 'grazie', translation: 'thank you' },
           ]
         }
         return supertest(app)
