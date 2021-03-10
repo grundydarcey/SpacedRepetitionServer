@@ -128,11 +128,19 @@ class LinkedList {
 
 
   moveHead(level) {
-
+    let head = this.head;
+    this.head - this.head.next;
+    this.insertAt(level, head.value);
   }
 
   listNodes() {
-
+    let node = this.head;
+    const arr = [];
+    while (node) {
+      arr.push(node);
+      node = node.next;
+    }
+    return arr;
   }
 
   map(callback) {
