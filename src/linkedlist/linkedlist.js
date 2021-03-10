@@ -3,10 +3,18 @@ class _Node {
     this.value = value;
     this.next = next;
   }
+}
+
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
 
   insertFirst(item) {
     this.head = new _Node(item, this.head)
-  },
+  }
 
   insertLast(item) {
     if (this.head === null) {
@@ -18,7 +26,7 @@ class _Node {
       }
       tempNode.next = new _Node(item, null);
     }
-  },
+  }
 
   insertBefore(item, value) {
     let currentNode = this.head;
@@ -39,7 +47,7 @@ class _Node {
       console.log('Item to place before does not exist');
       return;
     }
-  },
+  }
 
   insertAfter(item, value) {
     let currentNode = this.head;
@@ -54,34 +62,97 @@ class _Node {
       console.log('Item to place after does not exist');
       return;
     }
-  },
+  }
 
   insertAt(index, item) {
+    if (!this.head) {
+      console.log('Indexed item not found');
+      return;
+    }
+    if (index === 0) {
+      this.insertFirst(item);
+      return;
+    }
 
-  },
+    let count = 0;
+    let currentNode = this.head;
+    while(count !== index && currentNode.next !== null) {
+      currentNode = currentNode.next;
+      count++;
+    }
+
+    if (count === index) {
+      this.insertBefore(item, currentNode.value);
+      return;
+    } else {
+      console.log('Indexed item not found');
+      return;
+    }
+  }
 
   find(item) {
-
-  },
+    let currentNode = this.head;
+    if (!this.head) {
+      return null;
+    }
+    while (currentNode.value !== item) {
+      if (currentNode.next === null) {
+        return null;
+      } else {
+        currentNode = currentNode.next;
+      }
+    }
+    return currentNode;
+  }
 
   remove(item) {
+    if (!this.head) {
+      return null;
+    }
+    if (this.head.value === item) {
+      this.head = this.head.next;
+      return;
+    }
+    let currentNode = this.head;
+    let previousNode = this.head;
+    while (currentNode !== null && currentNode.value !== item) {
+      previousNode = currentNode;
+      currentNode = currentNode.next;
+    }
+    if (currentNode === null) {
+      console.log('Remove failed, item not found');
+      return;
+    }
+    previousNode.next = currentNode.next;
+  }
 
-  },
 
   moveHead(level) {
 
-  },
+  }
 
   listNodes() {
 
-  },
+  }
 
   map(callback) {
-
-  },
+    let node = this.head;
+    const arr = [];
+    while (node) {
+      arr.push(cb(node));
+      node = node.next;
+    }
+    return arr;
+  }
   
   forEach(cb) {
-
+    let node = this.head;
+    const arr = [];
+    while (node) {
+      arr.push(cb(node));
+      node = node.next;
+    }
+    return arr;
   }
 }
 
