@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 class _Node {
   constructor(value, next) {
     this.value = value;
@@ -13,7 +14,7 @@ class LinkedList {
 
 
   insertFirst(item) {
-    this.head = new _Node(item, this.head)
+    this.head = new _Node(item, this.head);
   }
 
   insertLast(item) {
@@ -147,7 +148,7 @@ class LinkedList {
     let node = this.head;
     const arr = [];
     while (node) {
-      arr.push(cb(node));
+      arr.push(callback(node));
       node = node.next;
     }
     return arr;
