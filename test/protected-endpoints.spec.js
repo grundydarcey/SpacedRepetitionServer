@@ -1,5 +1,5 @@
-const app = require('../src/app')
-const helpers = require('./test-helpers')
+const app = require('../src/app');
+const helpers = require('./test-helpers');
 
 describe('Protected Endpoints', function () {
   let db

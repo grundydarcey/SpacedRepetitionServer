@@ -1,5 +1,5 @@
-const app = require('../src/app')
-const helpers = require('./test-helpers')
+const app = require('../src/app');
+const helpers = require('./test-helpers');
 
 describe('Language Endpoints', function () {
   let db
@@ -86,7 +86,6 @@ describe('Language Endpoints', function () {
         .expect(200)
         .expect(res => {
           expect(res.body).to.have.keys('language', 'words')
-
           expect(res.body.language).to.have.property('id', usersLanguage.id)
           expect(res.body.language).to.have.property('name', usersLanguage.name)
           expect(res.body.language).to.have.property('user_id', usersLanguage.user_id)
@@ -123,7 +122,7 @@ describe('Language Endpoints', function () {
       )
     })
 
-    it.skip(`responds with 200 and user's languages`, () => {
+    it(`responds with 200 and user's languages`, () => {
       return supertest(app)
         .get(`/api/language/head`)
         .set('Authorization', helpers.makeAuthHeader(testUser))
@@ -155,7 +154,7 @@ describe('Language Endpoints', function () {
       )
     })
 
-    it.skip(`responds with 400 required error when 'guess' is missing`, () => {
+    it(`responds with 400 required error when 'guess' is missing`, () => {
       const postBody = {
         randomField: 'test random field',
       }
@@ -174,7 +173,7 @@ describe('Language Endpoints', function () {
         guess: 'incorrect',
       }
 
-      it.skip(`responds with incorrect and moves head`, () => {
+      it(`responds with incorrect and moves head`, () => {
         return supertest(app)
           .post(`/api/language/guess`)
           .set('Authorization', helpers.makeAuthHeader(testUser))
@@ -190,7 +189,7 @@ describe('Language Endpoints', function () {
           })
       })
 
-      it.skip(`moves the word 1 space and updates incorrect count`, async () => {
+      it(`moves the word 1 space and updates incorrect count`, async () => {
         await supertest(app)
           .post(`/api/language/guess`)
           .set('Authorization', helpers.makeAuthHeader(testUser))
@@ -216,7 +215,7 @@ describe('Language Endpoints', function () {
         word => word.language_id === testLanguage.id
       )
 
-      it.skip(`responds with correct and moves head`, () => {
+      it(`responds with correct and moves head`, () => {
         const correctPostBody = {
           guess: testLanguagesWords[0].translation,
         }
@@ -235,7 +234,7 @@ describe('Language Endpoints', function () {
           })
       })
 
-      it.skip(`moves the word 2 spaces, increases score and correct count`, async () => {
+      it(`moves the word 2 spaces, increases score and correct count`, async () => {
         let correctPostBody = {
           guess: testLanguagesWords[0].translation,
         }
