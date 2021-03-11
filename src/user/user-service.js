@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs')
-
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
 
 const UserService = {
@@ -42,16 +41,13 @@ const UserService = {
     }
   },
   populateUserWords(db, user_id) {
-    return db.transaction(async trx => {
+    return db.transaction(async (trx) => {
       const [languageId] = await trx
         .into('language')
         .insert([
           { name: 'Italian', user_id },
         ], ['id'])
 
-      // when inserting words,
-      // we need to know the current sequence number
-      // so that we can set the `next` field of the linked language
       const seq = await db
         .from('word_id_seq')
         .select('last_value')
@@ -93,4 +89,4 @@ const UserService = {
   },
 }
 
-module.exports = UserService
+module.exports = UserService;
