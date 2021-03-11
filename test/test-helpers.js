@@ -1,6 +1,6 @@
-const knex = require('knex')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const knex = require('knex');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 /**
  * create a knex instance connected to postgres
@@ -194,4 +194,4 @@ module.exports = {
   cleanTables,
   seedUsers,
   seedUsersLanguagesWords,
-}
+};

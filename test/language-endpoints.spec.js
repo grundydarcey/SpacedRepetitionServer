@@ -43,7 +43,7 @@ describe('Language Endpoints', function () {
             db,
             testUsers,
             testLanguages,
-            testWords,
+            testWords
           )
         })
 
@@ -75,7 +75,7 @@ describe('Language Endpoints', function () {
         db,
         testUsers,
         testLanguages,
-        testWords,
+        testWords
       )
     })
 
@@ -118,7 +118,7 @@ describe('Language Endpoints', function () {
         db,
         testUsers,
         testLanguages,
-        testWords,
+        testWords
       )
     })
 
@@ -150,7 +150,7 @@ describe('Language Endpoints', function () {
         db,
         testUsers,
         testLanguages,
-        testWords,
+        testWords
       )
     })
 

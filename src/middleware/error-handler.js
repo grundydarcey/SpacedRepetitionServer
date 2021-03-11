@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { NODE_ENV } = require('../config');
 
 module.exports = function errorHandler(error, req, res, next) {
