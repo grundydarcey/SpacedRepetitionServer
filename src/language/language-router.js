@@ -1,13 +1,11 @@
-const express = require('express')
-const LanguageService = require('./language-service')
-const { requireAuth } = require('../middleware/jwt-auth')
+const express = require('express');
+const LanguageService = require('./language-service');
+const { requireAuth } = require('../middleware/jwt-auth');
 
 const languageRouter = express.Router();
 const bodyParser = express.json();
 
-languageRouter
-  .use(requireAuth)
-  .use(async (req, res, next) => {
+languageRouter.use(requireAuth).use(async (req, res, next) => {
     try {
       const language = await LanguageService.getUsersLanguage(
         req.app.get('db'),
@@ -119,4 +117,4 @@ languageRouter
     }
   });
 
-module.exports = languageRouter
+module.exports = languageRouter;

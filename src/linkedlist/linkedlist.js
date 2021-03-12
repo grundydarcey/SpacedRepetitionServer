@@ -6,12 +6,10 @@ class _Node {
   }
 }
 
-
 class LinkedList {
   constructor() {
     this.head = null;
   }
-
 
   insertFirst(item) {
     this.head = new _Node(item, this.head);
@@ -52,15 +50,21 @@ class LinkedList {
 
   insertAfter(item, value) {
     let currentNode = this.head;
-    if (!currentNode.value === value && currentNode.next === null) {
+    if (!currentNode) {
+      return null;
+    }
+    while ((currentNode.value !== value) & (currentNode.next !== null)) {
+      currentNode = currentNode.next;
+    }
+    if (currentNode.value === value && currentNode.next === null) {
       this.insertLast(item);
       return;
-    }
+    } 
     if (currentNode.value === value) {
       let nodeHolder = new _Node(item, currentNode.next);
       currentNode.next = nodeHolder;
     } else {
-      console.log('Item to place after does not exist');
+      console.log('After item not found');
       return;
     }
   }
@@ -126,7 +130,6 @@ class LinkedList {
     }
     previousNode.next = currentNode.next;
   }
-
 
   moveHead(level) {
     let head = this.head;

@@ -118,25 +118,6 @@ describe('User Endpoints', function () {
     });
 
     describe('Given a valid user', () => {
-      it('responds 201, serialized user with no password', () => {
-        const newUser = {
-          username: 'test username',
-          password: '11AAaa!!',
-          name: 'test name',
-        };
-        return supertest(app)
-          .post('/api/user')
-          .send(newUser)
-          .expect(201)
-          .expect(res => {
-            expect(res.body).to.have.property('id');
-            expect(res.body.username).to.eql(newUser.username);
-            expect(res.body.name).to.eql(newUser.name);
-            expect(res.body).to.not.have.property('password');
-            expect(res.headers.location).to.eql(`/api/user/${res.body.id}`);
-          });
-      });
-
       it('stores the new user in db with bcryped password', () => {
         const newUser = {
           username: 'test username',
