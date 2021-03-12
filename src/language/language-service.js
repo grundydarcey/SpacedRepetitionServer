@@ -45,25 +45,9 @@ const LanguageService = {
     practiceList.total_score = lang.total_score;
 
     let headWord = words.find((word) => word.id === lang.head);
-
-    practiceList.insertFirst({
-      id: headWord.id,
-      original: headWord.original,
-      translation: headWord.translation,
-      memory_value: headWord.memory_value,
-      correct_count: headWord.correct_count,
-      incorrect_count: headWord.incorrect_count
-    });
-    while (headWord.next) {
+    while (headWord) {
+      practiceList.insertLast(headWord)
       headWord = words.find((word) => word.id === headWord.next);
-      practiceList.insertLast({
-        id: headWord.id,
-        original: headWord.original,
-        translation: headWord.translation,
-        memory_value: headWord.memory_value,
-        correct_count: headWord.correct_count,
-        incorrect_count: headWord.incorrect_count,
-      });
     }
     return practiceList;
   },

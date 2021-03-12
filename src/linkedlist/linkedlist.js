@@ -133,7 +133,7 @@ class LinkedList {
 
   moveHead(level) {
     let head = this.head;
-    this.head - this.head.next;
+    this.head = this.head.next;
     this.insertAt(level, head.value);
   }
 

@@ -30,7 +30,7 @@ VALUES
   (7, 1, 'vino', 'wine', 8),
   (8, 1, 'bevanda', 'a drink', 9),
   (9, 1, 'acqua', 'water', 10),
-  (10, 1 'grazie', 'thank you', null)
+  (10, 1, 'grazie', 'thank you', null);
 
 UPDATE "language" SET head = 1 WHERE id = 1;
 

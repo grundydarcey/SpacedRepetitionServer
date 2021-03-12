@@ -88,7 +88,7 @@ languageRouter.route('/guess').post(bodyParser, async (req, res, next) => {
         : newWordList.head.value.memory_value * 2;
     newWordList.total_score++;
     newWordList.moveHead(newWordList.head.value.memory_value);
-
+   // let node = newWordList.head
     LanguageService.persistLL(req.app
       .get('db'), newWordList)
       .then(() => {
