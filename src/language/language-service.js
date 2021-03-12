@@ -69,11 +69,14 @@ const LanguageService = {
   },
 
   updateWord(db, word) {
-    return db.from('word').where({ id: word.id }).update({
-      memory_value: word.memory_value,
-      correct_count: word.correct_count,
-      incorrect_count: word.incorrect_count,
-    });
+    return db
+      .from('word')
+      .where({ id: word.id })
+      .update({
+        memory_value: word.memory_value,
+        correct_count: word.correct_count,
+        incorrect_count: word.incorrect_count,
+      });
   },
 
   incrementTotal(db, lang) {
@@ -92,6 +95,7 @@ const LanguageService = {
           total_score: lang.total_score,
           head: lang.head.value.id,
         }),
+
         ...lang.forEach((node) =>
           db('word')
             .transacting(trx)
@@ -106,6 +110,30 @@ const LanguageService = {
       ])
     );
   },
+
+  // persistLLone(db, lang) {
+  //   return db.transaction((trx) =>
+  //     db('language').transacting(trx).where('id', lang.id).update({
+  //       total_score: lang.total_score,
+  //       head: lang.head.value.id,
+  //     })
+  //   );
+  // },
+
+  // persistLLtwo(db, lang) {
+  //   return db.transaction((trx) =>
+  //   ...lang.ForEach((node) =>
+  //     db('word')
+  //       .transacting(trx)
+  //       .where('id', node.value.id)
+  //       .update({
+  //         memory_value: node.value.memory_value,
+  //         correct_count: node.value.correct_count,
+  //         incorrect_count: node.value.incorrect_count,
+  //         next: node.next ? node.next.value.id : null,
+  //       })
+  //   ))
+  // }
 };
 
 module.exports = LanguageService;
