@@ -122,7 +122,6 @@
 const express = require('express');
 const LanguageService = require('./language-service');
 const { requireAuth } = require('../middleware/jwt-auth');
-
 const languageRouter = express.Router();
 const bodyParser = express.json();
 
@@ -199,7 +198,10 @@ languageRouter.route('/guess').post(bodyParser, async (req, res, next) => {
 
   console.dir(newWordList);
 
-  if (req.body.guess === newWordList.head.value.translation) {
+  const userAnswer = req.body.guess;
+  const correctAnswer = newWordList.head.value.translation;
+
+  if (userAnswer.toLowerCase().split(' ').join('') === correctAnswer.toLowerCase().split(' ').join('')) {
     newWordList.head.value.correct_count++;
     newWordList.head.value.memory_value =
       newWordList.head.value.memory_value * 2 >= newWordList.listNodes().length
@@ -208,17 +210,19 @@ languageRouter.route('/guess').post(bodyParser, async (req, res, next) => {
     newWordList.total_score++;
     newWordList.moveHead(newWordList.head.value.memory_value);
 
-    LanguageService.persistLL(req.app.get('db'), newWordList).then(() => {
-      res.json({
-        nextWord: newWordList.head.value.original,
-        wordCorrectCount: newWordList.head.value.correct_count,
-        wordIncorrectCount: newWordList.head.value.incorrect_count,
-        totalScore: newWordList.total_score,
-        answer: req.body.guess,
-        isCorrect: true,
+    LanguageService.persistLL(req.app
+      .get('db'), newWordList)
+      .then(() => {
+        res.json({
+          nextWord: newWordList.head.value.original,
+          wordCorrectCount: newWordList.head.value.correct_count,
+          wordIncorrectCount: newWordList.head.value.incorrect_count,
+          totalScore: newWordList.total_score,
+          answer: req.body.guess,
+          isCorrect: true,
+        });
+        next();
       });
-      next();
-    });
   } else {
     newWordList.head.value.incorrect_count++;
     newWordList.head.value.memory_value = 1;

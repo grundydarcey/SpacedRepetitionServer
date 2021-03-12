@@ -89,14 +89,17 @@ const LanguageService = {
   },
 
   persistLL(db, lang) {
-    return db.transaction((trx) =>
+    return db.transaction(trx =>
       Promise.all([
-        db('language').transacting(trx).where('id', lang.id).update({
-          total_score: lang.total_score,
-          head: lang.head.value.id,
-        }),
+        db('language')
+          .transacting(trx)
+          .where('id', lang.id)
+          .update({
+            total_score: lang.total_score,
+            head: lang.head.value.id,
+          }),
 
-        ...lang.forEach((node) =>
+        ...lang.forEach(node =>
           db('word')
             .transacting(trx)
             .where('id', node.value.id)
@@ -109,31 +112,8 @@ const LanguageService = {
         ),
       ])
     );
-  },
-
-  // persistLLone(db, lang) {
-  //   return db.transaction((trx) =>
-  //     db('language').transacting(trx).where('id', lang.id).update({
-  //       total_score: lang.total_score,
-  //       head: lang.head.value.id,
-  //     })
-  //   );
-  // },
-
-  // persistLLtwo(db, lang) {
-  //   return db.transaction((trx) =>
-  //   ...lang.ForEach((node) =>
-  //     db('word')
-  //       .transacting(trx)
-  //       .where('id', node.value.id)
-  //       .update({
-  //         memory_value: node.value.memory_value,
-  //         correct_count: node.value.correct_count,
-  //         incorrect_count: node.value.incorrect_count,
-  //         next: node.next ? node.next.value.id : null,
-  //       })
-  //   ))
-  // }
+  }
 };
+
 
 module.exports = LanguageService;
