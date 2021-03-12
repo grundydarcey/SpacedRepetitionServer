@@ -51,7 +51,7 @@ const LanguageService = {
       original: headWord.original,
       translation: headWord.translation,
       memory_value: headWord.memory_value,
-      correct_count: headWord.corrent_count,
+      correct_count: headWord.correct_count,
       incorrect_count: headWord.incorrect_count
     });
     while (headWord.next) {
