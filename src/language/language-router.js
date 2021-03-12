@@ -1,7 +1,6 @@
 const express = require('express');
 const LanguageService = require('./language-service');
 const { requireAuth } = require('../middleware/jwt-auth');
-
 const languageRouter = express.Router();
 const bodyParser = express.json();
 
@@ -60,8 +59,8 @@ languageRouter
     }
   });
 
-languageRouter
-  .post('/guess', async (req, res, next) => {
+languageRouter.route('/guess')
+  .post(bodyParser, async (req, res, next) => {
     if (!Object.keys(req.body).includes('guess')) {
       return res.status(400).json({
         error: `Missing 'guess' in request body`,
@@ -77,7 +76,7 @@ languageRouter
       words
     );
     console.dir(newWordList);
-    if (req.body.guess === newWordLost.head.value.translation) {
+    if (req.body.guess === newWordList.head.value.translation) {
       newWordList.head.value.correct_count++;
       newWordList.head.value.memory_value =
         newWordList.head.value.memory_value * 2 >= newWordList.listNodes().length
