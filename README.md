@@ -1,52 +1,49 @@
-# Spaced repetition API!
+Spaced Repetition API
 
-## Local dev setup
+Links
+Live Client: https://dg-spaced-repetition-client.vercel.app/login
+Client Repository: https://github.com/grundydarcey/SpacedRepetitionClient
+Live Server: https://safe-woodland-49880.herokuapp.com/
+Server Repository: https://github.com/grundydarcey/spacedrepetitionserver
 
-If using user `dunder-mifflin`:
 
-```bash
-mv example.env .env
-createdb -U dunder-mifflin spaced-repetition
-createdb -U dunder-mifflin spaced-repetition-test
-```
+Summary
+This is a language learning application using the Spaced Repetition learning technique.
 
-If your `dunder-mifflin` user has a password be sure to set it in `.env` for all appropriate fields. Or if using a different user, update appropriately.
+Endpoints
 
-```bash
-npm install
-npm run migrate
-env MIGRATION_DB_NAME=spaced-repetition-test npm run migrate
-```
+/api/user
+POST requests
+Used for registering new users
 
-And `npm test` should work at this point
+/api/auth
+POST requests authorization
+Used for logging in and registering new users
 
-## Configuring Postgres
+/api/language
+GET requests
+This endpoint returns a list of a user's languages, and the words being studied in that language
 
-For tests involving time to run properly, configure your Postgres database to run in the UTC timezone.
+/api/language/head
+GET requests
+This endpoint will return the next word to be studied
 
-1. Locate the `postgresql.conf` file for your Postgres installation.
-   1. E.g. for an OS X, Homebrew install: `/usr/local/var/postgres/postgresql.conf`
-   2. E.g. on Windows, _maybe_: `C:\Program Files\PostgreSQL\11.2\data\postgresql.conf`
-   3. E.g  on Ubuntu 18.04 probably: '/etc/postgresql/10/main/postgresql.conf'
-2. Find the `timezone` line and set it to `UTC`:
+/api/language/guess
+Users can POST their guess to each word as displayed in the /head endpoint, and receive feedback based on their response.
+User's guess determines the position where the word will be placed in the list
 
-```conf
-# - Locale and Formatting -
-
-datestyle = 'iso, mdy'
-#intervalstyle = 'postgres'
-timezone = 'UTC'
-#timezone_abbreviations = 'Default'     # Select the set of available time zone
-```
-
-## Scripts
-
-Start the application `npm start`
-
-Start nodemon for the application `npm run dev`
-
-Run the tests mode `npm test`
-
-Run the migrations up `npm run migrate`
-
-Run the migrations down `npm run migrate -- 0`
+Stack Used in this project:
+-ReactJS
+-React Router
+-React Context
+-HTML
+-CSS
+-Webpack
+-Cypress for testing
+-RESTful API
+-Node & Express
+-PostgresSQL
+-Knex
+-Supertest
+-Mocha
+-Chai
